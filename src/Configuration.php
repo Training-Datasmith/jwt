@@ -43,9 +43,7 @@ final readonly class Configuration
         $this->validator = $validator ?? new Validation\Validator();
 
         $this->builderFactory = $builderFactory
-            ?? static function (ClaimsFormatter $claimFormatter) use ($encoder): Builder {
-                return Token\Builder::new($encoder, $claimFormatter);
-            };
+            ?? (static fn(ClaimsFormatter $claimFormatter): Builder => Token\Builder::new($encoder, $claimFormatter));
 
         $this->validationConstraints = $validationConstraints;
     }

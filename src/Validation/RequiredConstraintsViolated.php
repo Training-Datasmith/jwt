@@ -28,16 +28,13 @@ final class RequiredConstraintsViolated extends RuntimeException implements Exce
     private static function buildMessage(array $violations): string
     {
         $violations = array_map(
-            static function (ConstraintViolation $violation): string {
-                return '- ' . $violation->getMessage();
-            },
+            static fn(ConstraintViolation $violation): string => '- ' . $violation->getMessage(),
             $violations,
         );
 
         $message  = "The token violates some mandatory constraints, details:\n";
-        $message .= implode("\n", $violations);
 
-        return $message;
+        return $message . implode("\n", $violations);
     }
 
     /** @return ConstraintViolation[] */

@@ -50,7 +50,7 @@ final readonly class MultibyteStringConverter implements SignatureConverter
         }
 
         $pointR = self::preparePositiveInteger(substr($points, 0, $length));
-        $pointS = self::preparePositiveInteger(substr($points, $length, null));
+        $pointS = self::preparePositiveInteger(substr($points, $length));
 
         $lengthR = self::octetLength($pointR);
         $lengthS = self::octetLength($pointS);
@@ -85,7 +85,7 @@ final readonly class MultibyteStringConverter implements SignatureConverter
             substr($data, 0, self::BYTE_SIZE) === self::ASN1_NEGATIVE_INTEGER
             && substr($data, 2, self::BYTE_SIZE) <= self::ASN1_BIG_INTEGER_LIMIT
         ) {
-            $data = substr($data, 2, null);
+            $data = substr($data, 2);
         }
 
         return $data;
@@ -140,7 +140,7 @@ final readonly class MultibyteStringConverter implements SignatureConverter
             substr($data, 0, self::BYTE_SIZE) === self::ASN1_NEGATIVE_INTEGER
             && substr($data, 2, self::BYTE_SIZE) > self::ASN1_BIG_INTEGER_LIMIT
         ) {
-            $data = substr($data, 2, null);
+            $data = substr($data, 2);
         }
 
         return $data;

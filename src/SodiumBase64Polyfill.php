@@ -49,7 +49,7 @@ final readonly class SodiumBase64Polyfill
             $variant === self::SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING
             || $variant === self::SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING
         ) {
-            $encoded = rtrim($encoded, '=');
+            return rtrim($encoded, '=');
         }
 
         return $encoded;
