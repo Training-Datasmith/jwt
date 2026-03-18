@@ -1,14 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Encoding;
 
-use Lcobucci\JWT\ClaimsFormatter;
-use Lcobucci\JWT\Token\RegisteredClaims;
-
 use function array_key_exists;
 use function count;
+
 use function current;
+
+use Lcobucci\JWT\ClaimsFormatter;
+use Lcobucci\JWT\Token\RegisteredClaims;
 
 final readonly class UnifyAudience implements ClaimsFormatter
 {

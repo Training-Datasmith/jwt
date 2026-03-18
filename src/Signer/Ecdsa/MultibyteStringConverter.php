@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -21,10 +22,12 @@ use function hex2bin;
 use function hexdec;
 use function is_string;
 use function str_pad;
-use function strlen;
-use function substr;
 
 use const STR_PAD_LEFT;
+
+use function strlen;
+
+use function substr;
 
 /**
  * ECDSA signature converter using ext-mbstring

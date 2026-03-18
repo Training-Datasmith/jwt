@@ -1,7 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests;
+
+use function assert;
+use function explode;
+use function hash_hmac;
+use function implode;
 
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Encoding;
@@ -15,17 +21,15 @@ use Lcobucci\JWT\SodiumBase64Polyfill;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
+
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\Validation\Validator;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
-
-use function assert;
-use function explode;
-use function hash_hmac;
-use function implode;
 
 use const PHP_EOL;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
+
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(Configuration::class)]
 #[PHPUnit\CoversClass(Encoding\JoseEncoder::class)]

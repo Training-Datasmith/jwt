@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests;
+
+use function assert;
 
 use DateTimeImmutable;
 use Lcobucci\Clock\FrozenClock;
@@ -19,9 +22,8 @@ use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use Lcobucci\JWT\Validation\Validator;
 use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
-use function assert;
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(Configuration::class)]
 #[PHPUnit\CoversClass(Encoding\JoseEncoder::class)]
@@ -132,8 +134,7 @@ class UnsignedTokenTest extends TestCase
 
     private function validUserConstraint(): Constraint
     {
-        return new class () implements Constraint
-        {
+        return new class () implements Constraint {
             public function assert(Token $token): void
             {
                 if (! $token instanceof Token\Plain) {

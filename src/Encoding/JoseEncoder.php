@@ -1,19 +1,22 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Encoding;
-
-use JsonException;
-use Lcobucci\JWT\Decoder;
-use Lcobucci\JWT\Encoder;
-use Lcobucci\JWT\SodiumBase64Polyfill;
 
 use function json_decode;
 use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
 use const JSON_UNESCAPED_SLASHES;
+
 use const JSON_UNESCAPED_UNICODE;
+
+use JsonException;
+
+use Lcobucci\JWT\Decoder;
+use Lcobucci\JWT\Encoder;
+use Lcobucci\JWT\SodiumBase64Polyfill;
 
 /**
  * A utilitarian class that encodes and decodes data according to JOSE specifications

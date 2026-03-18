@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests;
+
+use function hex2bin;
 
 use Lcobucci\JWT\Signer\Ecdsa;
 use Lcobucci\JWT\Signer\Ecdsa\Sha256;
@@ -10,12 +13,12 @@ use Lcobucci\JWT\Signer\Ecdsa\Sha512;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\OpenSSL;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
-
-use function hex2bin;
 
 use const PHP_EOL;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
+
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(InMemory::class)]
 #[PHPUnit\CoversClass(OpenSSL::class)]

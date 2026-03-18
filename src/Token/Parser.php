@@ -1,18 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
 
+use function array_key_exists;
+use function count;
+
 use DateTimeImmutable;
+
+use function explode;
+
+use function is_array;
+use function is_numeric;
+
 use Lcobucci\JWT\Decoder;
 use Lcobucci\JWT\Parser as ParserInterface;
 use Lcobucci\JWT\Token as TokenInterface;
 
-use function array_key_exists;
-use function count;
-use function explode;
-use function is_array;
-use function is_numeric;
 use function number_format;
 
 final readonly class Parser implements ParserInterface

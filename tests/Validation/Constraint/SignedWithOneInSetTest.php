@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Validation\Constraint;
@@ -22,9 +23,10 @@ use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\SignedWithOneInSet;
 use Lcobucci\JWT\Validation\Constraint\SignedWithUntilDate;
 use Lcobucci\JWT\Validation\ConstraintViolation;
-use PHPUnit\Framework\Attributes as PHPUnit;
 
 use const PHP_EOL;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
 
 #[PHPUnit\CoversClass(SignedWithOneInSet::class)]
 #[PHPUnit\CoversClass(SignedWithUntilDate::class)]

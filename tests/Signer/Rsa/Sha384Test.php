@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Rsa;
@@ -8,9 +9,10 @@ use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\OpenSSL;
 use Lcobucci\JWT\Signer\Rsa;
 use Lcobucci\JWT\Signer\Rsa\Sha384;
-use PHPUnit\Framework\Attributes as PHPUnit;
 
 use const OPENSSL_ALGO_SHA384;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
 
 #[PHPUnit\CoversClass(Sha384::class)]
 #[PHPUnit\CoversClass(Rsa::class)]

@@ -1,17 +1,19 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer\Key;
+
+use function assert;
+use function is_string;
 
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\SodiumBase64Polyfill;
 use SensitiveParameter;
+
 use SplFileObject;
 use Throwable;
-
-use function assert;
-use function is_string;
 
 final readonly class InMemory implements Key
 {

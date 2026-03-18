@@ -1,24 +1,30 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Rsa;
+
+use function assert;
 
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\Rsa;
 use Lcobucci\JWT\Tests\Keys;
-use OpenSSLAsymmetricKey;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
-use function assert;
 use function openssl_error_string;
 use function openssl_pkey_get_private;
+
 use function openssl_pkey_get_public;
 use function openssl_sign;
 use function openssl_verify;
 
+use OpenSSLAsymmetricKey;
+
 use const PHP_EOL;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
+
+use PHPUnit\Framework\TestCase;
 
 abstract class RsaTestCase extends TestCase
 {

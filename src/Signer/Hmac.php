@@ -1,12 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
 
+use function hash_equals;
+
+use function hash_hmac;
+
 use Lcobucci\JWT\Signer;
 
-use function hash_equals;
-use function hash_hmac;
 use function strlen;
 
 abstract readonly class Hmac implements Signer

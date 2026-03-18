@@ -1,11 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
 
+use function hash_equals;
+
 use Lcobucci\JWT\Signer;
 
-use function hash_equals;
 use function sodium_crypto_generichash;
 use function strlen;
 

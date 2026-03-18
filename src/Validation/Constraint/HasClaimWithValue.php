@@ -1,14 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
 
+use function in_array;
+
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Validation\Constraint;
-use Lcobucci\JWT\Validation\ConstraintViolation;
 
-use function in_array;
+use Lcobucci\JWT\Validation\ConstraintViolation;
 
 final readonly class HasClaimWithValue implements Constraint
 {

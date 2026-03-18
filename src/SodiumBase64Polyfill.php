@@ -1,18 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT;
 
-use Lcobucci\JWT\Encoding\CannotDecodeContent;
-use SodiumException;
-
 use function base64_decode;
 use function base64_encode;
+
 use function function_exists;
 use function is_string;
+
+use Lcobucci\JWT\Encoding\CannotDecodeContent;
+
 use function rtrim;
 use function sodium_base642bin;
 use function sodium_bin2base64;
+
+use SodiumException;
+
 use function strtr;
 
 /** @internal */

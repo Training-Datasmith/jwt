@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Rsa;
@@ -6,12 +7,14 @@ namespace Lcobucci\JWT\Tests\Signer\Rsa;
 use Lcobucci\JWT\Signer\CannotSignPayload;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\OpenSSL;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
 use function openssl_error_string;
 
 use const PHP_EOL;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
+
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(OpenSSL::class)]
 #[PHPUnit\CoversClass(CannotSignPayload::class)]

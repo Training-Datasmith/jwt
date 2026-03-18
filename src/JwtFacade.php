@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT;
+
+use function assert;
 
 use Closure;
 use DateTimeImmutable;
@@ -13,9 +16,8 @@ use Lcobucci\JWT\Validation\SignedWith;
 use Lcobucci\JWT\Validation\ValidAt;
 use Lcobucci\JWT\Validation\Validator;
 use NoDiscard;
-use Psr\Clock\ClockInterface as Clock;
 
-use function assert;
+use Psr\Clock\ClockInterface as Clock;
 
 final readonly class JwtFacade
 {
@@ -25,7 +27,7 @@ final readonly class JwtFacade
         private Parser $parser = new Token\Parser(new JoseEncoder()),
         ?Clock $clock = null,
     ) {
-        $this->clock = $clock ?? new class implements Clock {
+        $this->clock = $clock ?? new class () implements Clock {
             public function now(): DateTimeImmutable
             {
                 return new DateTimeImmutable();

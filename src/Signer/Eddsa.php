@@ -1,13 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
 
 use Lcobucci\JWT\Signer;
-use SodiumException;
 
 use function sodium_crypto_sign_detached;
+
 use function sodium_crypto_sign_verify_detached;
+
+use SodiumException;
 
 final readonly class Eddsa implements Signer
 {

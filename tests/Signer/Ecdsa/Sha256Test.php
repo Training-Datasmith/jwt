@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Ecdsa;
@@ -8,9 +9,10 @@ use Lcobucci\JWT\Signer\Ecdsa\Sha256;
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\OpenSSL;
-use PHPUnit\Framework\Attributes as PHPUnit;
 
 use const OPENSSL_ALGO_SHA256;
+
+use PHPUnit\Framework\Attributes as PHPUnit;
 
 #[PHPUnit\CoversClass(Ecdsa::class)]
 #[PHPUnit\CoversClass(Ecdsa\MultibyteStringConverter::class)]

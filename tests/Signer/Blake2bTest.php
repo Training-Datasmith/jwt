@@ -1,16 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer;
+
+use function hash_equals;
 
 use Lcobucci\JWT\Signer\Blake2b;
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\SodiumBase64Polyfill;
 use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
-use function hash_equals;
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(Blake2b::class)]
 #[PHPUnit\UsesClass(InMemory::class)]

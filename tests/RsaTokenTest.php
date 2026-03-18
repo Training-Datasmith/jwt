@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests;
+
+use function assert;
 
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Encoding;
@@ -18,9 +21,8 @@ use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use Lcobucci\JWT\Validation\Validator;
 use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
-use function assert;
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(Configuration::class)]
 #[PHPUnit\CoversClass(Encoding\JoseEncoder::class)]

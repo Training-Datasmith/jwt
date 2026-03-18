@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation;
 
-use Lcobucci\JWT\Exception;
-use RuntimeException;
-
 use function array_map;
 use function implode;
+
+use Lcobucci\JWT\Exception;
+use RuntimeException;
 
 final class RequiredConstraintsViolated extends RuntimeException implements Exception
 {
@@ -28,7 +29,7 @@ final class RequiredConstraintsViolated extends RuntimeException implements Exce
     private static function buildMessage(array $violations): string
     {
         $violations = array_map(
-            static fn(ConstraintViolation $violation): string => '- ' . $violation->getMessage(),
+            static fn (ConstraintViolation $violation): string => '- ' . $violation->getMessage(),
             $violations,
         );
 

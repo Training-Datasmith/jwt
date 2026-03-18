@@ -1,18 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Hmac;
-
-use Lcobucci\JWT\Signer\Hmac;
-use Lcobucci\JWT\Signer\InvalidKeyProvided;
-use Lcobucci\JWT\Signer\Key\InMemory;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
 use function assert;
 use function hash_equals;
 use function hash_hmac;
 use function is_int;
+
+use Lcobucci\JWT\Signer\Hmac;
+
+use Lcobucci\JWT\Signer\InvalidKeyProvided;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use PHPUnit\Framework\Attributes as PHPUnit;
+use PHPUnit\Framework\TestCase;
+
 use function random_bytes;
 use function sprintf;
 use function strlen;

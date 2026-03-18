@@ -1,18 +1,20 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Encoding;
 
-use Lcobucci\JWT\Encoding\CannotDecodeContent;
-use Lcobucci\JWT\Encoding\CannotEncodeContent;
-use Lcobucci\JWT\Encoding\JoseEncoder;
-use Lcobucci\JWT\SodiumBase64Polyfill;
-use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
-
 use function assert;
 use function base64_decode;
 use function is_string;
+
+use Lcobucci\JWT\Encoding\CannotDecodeContent;
+use Lcobucci\JWT\Encoding\CannotEncodeContent;
+use Lcobucci\JWT\Encoding\JoseEncoder;
+
+use Lcobucci\JWT\SodiumBase64Polyfill;
+use PHPUnit\Framework\Attributes as PHPUnit;
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(JoseEncoder::class)]
 #[PHPUnit\CoversClass(CannotDecodeContent::class)]

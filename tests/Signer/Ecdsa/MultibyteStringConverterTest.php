@@ -1,15 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Ecdsa;
 
+use function bin2hex;
+use function hex2bin;
+
 use Lcobucci\JWT\Signer\Ecdsa\ConversionFailed;
 use Lcobucci\JWT\Signer\Ecdsa\MultibyteStringConverter;
+
 use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 
-use function bin2hex;
-use function hex2bin;
 use function strlen;
 
 /** @coversDefaultClass \Lcobucci\JWT\Signer\Ecdsa\MultibyteStringConverter */

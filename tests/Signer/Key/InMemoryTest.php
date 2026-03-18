@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Tests\Signer\Key;
+
+use function base64_encode;
 
 use Lcobucci\JWT\Encoding\CannotDecodeContent;
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
@@ -9,9 +12,8 @@ use Lcobucci\JWT\Signer\Key\FileCouldNotBeRead;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\SodiumBase64Polyfill;
 use PHPUnit\Framework\Attributes as PHPUnit;
-use PHPUnit\Framework\TestCase;
 
-use function base64_encode;
+use PHPUnit\Framework\TestCase;
 
 #[PHPUnit\CoversClass(CannotDecodeContent::class)]
 #[PHPUnit\CoversClass(FileCouldNotBeRead::class)]

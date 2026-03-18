@@ -1,27 +1,34 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
 
-use Lcobucci\JWT\Signer;
-use OpenSSLAsymmetricKey;
-
 use function array_key_exists;
 use function assert;
+
 use function is_array;
 use function is_bool;
 use function is_int;
+
+use Lcobucci\JWT\Signer;
+
 use function openssl_error_string;
-use function openssl_pkey_get_details;
-use function openssl_pkey_get_private;
-use function openssl_pkey_get_public;
-use function openssl_sign;
-use function openssl_verify;
 
 use const OPENSSL_KEYTYPE_DH;
 use const OPENSSL_KEYTYPE_DSA;
 use const OPENSSL_KEYTYPE_EC;
 use const OPENSSL_KEYTYPE_RSA;
+
+use function openssl_pkey_get_details;
+use function openssl_pkey_get_private;
+
+use function openssl_pkey_get_public;
+use function openssl_sign;
+use function openssl_verify;
+
+use OpenSSLAsymmetricKey;
+
 use const PHP_EOL;
 
 abstract readonly class OpenSSL implements Signer

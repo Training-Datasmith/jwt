@@ -1,13 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Encoding;
 
+use function array_key_exists;
+
 use DateTimeImmutable;
 use Lcobucci\JWT\ClaimsFormatter;
-use Lcobucci\JWT\Token\RegisteredClaims;
 
-use function array_key_exists;
+use Lcobucci\JWT\Token\RegisteredClaims;
 
 final readonly class MicrosecondBasedDateConversion implements ClaimsFormatter
 {

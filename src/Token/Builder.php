@@ -1,21 +1,25 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
 
+use function array_diff;
+use function array_merge;
+
 use DateTimeImmutable;
+
+use function in_array;
+
 use Lcobucci\JWT\Builder as BuilderInterface;
 use Lcobucci\JWT\ClaimsFormatter;
 use Lcobucci\JWT\Encoder;
 use Lcobucci\JWT\Encoding\CannotEncodeContent;
 use Lcobucci\JWT\Signer;
+
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\UnencryptedToken;
 use NoDiscard;
-
-use function array_diff;
-use function array_merge;
-use function in_array;
 
 /** @immutable */
 final readonly class Builder implements BuilderInterface
