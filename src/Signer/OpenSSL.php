@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Lcobucci\JWT\Signer;
 
 use function array_key_exists;
-use function assert;
 
 use function is_array;
 use function is_bool;
@@ -77,6 +76,10 @@ abstract readonly class OpenSSL implements Signer
         $opensslKey = $this->getPublicKey($key);
         $result     = openssl_verify($payload, $expected, $opensslKey, $this->algorithm());
 
+        if ($result === -1) {
+            throw CannotSignPayload::errorHappened($this->fullOpenSSLErrorString());
+        }
+
         return $result === 1;
     }
 
@@ -98,12 +101,18 @@ abstract readonly class OpenSSL implements Signer
         }
 
         $details = openssl_pkey_get_details($key);
-        assert(is_array($details));
 
-        assert(array_key_exists('bits', $details));
-        assert(is_int($details['bits']));
-        assert(array_key_exists('type', $details));
-        assert(is_int($details['type']));
+        if (! is_array($details)) {
+            throw InvalidKeyProvided::cannotBeParsed($this->fullOpenSSLErrorString());
+        }
+
+        if (! array_key_exists('bits', $details) || ! is_int($details['bits'])) {
+            throw InvalidKeyProvided::cannotBeParsed($this->fullOpenSSLErrorString());
+        }
+
+        if (! array_key_exists('type', $details) || ! is_int($details['type'])) {
+            throw InvalidKeyProvided::cannotBeParsed($this->fullOpenSSLErrorString());
+        }
 
         $this->guardAgainstIncompatibleKey($details['type'], $details['bits']);
 

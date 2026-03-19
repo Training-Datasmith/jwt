@@ -8,8 +8,6 @@ use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\Validation\SignedWith as SignedWithInterface;
 
-use const PHP_EOL;
-
 final readonly class SignedWithOneInSet implements SignedWithInterface
 {
     /** @var array<SignedWithUntilDate> */
@@ -22,18 +20,19 @@ final readonly class SignedWithOneInSet implements SignedWithInterface
 
     public function assert(Token $token): void
     {
-        $errorMessage = 'It was not possible to verify the signature of the token, reasons:';
-
         foreach ($this->constraints as $constraint) {
             try {
                 $constraint->assert($token);
 
                 return;
-            } catch (ConstraintViolation $violation) {
-                $errorMessage .= PHP_EOL . '- ' . $violation->getMessage();
+            } catch (ConstraintViolation) {
+                // try next constraint
             }
         }
 
-        throw ConstraintViolation::error($errorMessage, $this);
+        throw ConstraintViolation::error(
+            'Token signature could not be verified against any known key',
+            $this,
+        );
     }
 }
