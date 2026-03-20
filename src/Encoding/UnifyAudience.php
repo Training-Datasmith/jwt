@@ -1,31 +1,22 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Encoding;
 
 use function array_key_exists;
 use function count;
-
 use function current;
-
-use Lcobucci\JWT\ClaimsFormatter;
-use Lcobucci\JWT\Token\RegisteredClaims;
-
-final readonly class UnifyAudience implements ClaimsFormatter
+use Lcobucci\JWT\Claims_Formatter;
+use Lcobucci\JWT\Token\Registered_Claims;
+final readonly class Unify_Audience implements Claims_Formatter
 {
     /** @inheritdoc */
-    public function formatClaims(array $claims): array
+    public function format_claims(array $claims): array
     {
-        if (
-            ! array_key_exists(RegisteredClaims::AUDIENCE, $claims)
-            || count($claims[RegisteredClaims::AUDIENCE]) !== 1
-        ) {
+        if (!array_key_exists(Registered_Claims::AUDIENCE, $claims) || count($claims[Registered_Claims::AUDIENCE]) !== 1) {
             return $claims;
         }
-
-        $claims[RegisteredClaims::AUDIENCE] = current($claims[RegisteredClaims::AUDIENCE]);
-
+        $claims[Registered_Claims::AUDIENCE] = current($claims[Registered_Claims::AUDIENCE]);
         return $claims;
     }
 }

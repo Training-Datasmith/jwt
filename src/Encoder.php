@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
-use Lcobucci\JWT\Encoding\CannotEncodeContent;
-use NoDiscard;
-
+use Lcobucci\JWT\Encoding\Cannot_Encode_Content;
+use No_Discard;
 interface Encoder
 {
     /**
@@ -16,9 +14,8 @@ interface Encoder
      *
      * @throws CannotEncodeContent When something goes wrong while encoding.
      */
-    #[NoDiscard]
-    public function jsonEncode(mixed $data): string;
-
+    #[No_Discard]
+    public function json_encode(mixed $data): string;
     /**
      * Encodes to base64url
      *
@@ -26,6 +23,6 @@ interface Encoder
      *
      * @return ($data is non-empty-string ? non-empty-string : string)
      */
-    #[NoDiscard]
-    public function base64UrlEncode(string $data): string;
+    #[No_Discard]
+    public function base64url_encode(string $data): string;
 }

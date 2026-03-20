@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
 use DateTimeImmutable;
-use Lcobucci\JWT\Encoding\CannotEncodeContent;
-use Lcobucci\JWT\Signer\CannotSignPayload;
-use Lcobucci\JWT\Signer\Ecdsa\ConversionFailed;
-use Lcobucci\JWT\Signer\InvalidKeyProvided;
+use Lcobucci\JWT\Encoding\Cannot_Encode_Content;
+use Lcobucci\JWT\Signer\Cannot_Sign_Payload;
+use Lcobucci\JWT\Signer\Ecdsa\Conversion_Failed;
+use Lcobucci\JWT\Signer\Invalid_Key_Provided;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Token\RegisteredClaimGiven;
-use NoDiscard;
-
+use Lcobucci\JWT\Token\Registered_Claim_Given;
+use No_Discard;
 /** @immutable */
 interface Builder
 {
@@ -21,59 +19,51 @@ interface Builder
      *
      * @param non-empty-string ...$audiences
      */
-    #[NoDiscard]
-    public function permittedFor(string ...$audiences): Builder;
-
+    #[No_Discard]
+    public function permitted_for(string ...$audiences): Builder;
     /**
      * Configures the expiration time
      */
-    #[NoDiscard]
-    public function expiresAt(DateTimeImmutable $expiration): Builder;
-
+    #[No_Discard]
+    public function expires_at(DateTimeImmutable $expiration): Builder;
     /**
      * Configures the token id
      *
      * @param non-empty-string $id
      */
-    #[NoDiscard]
-    public function identifiedBy(string $id): Builder;
-
+    #[No_Discard]
+    public function identified_by(string $id): Builder;
     /**
      * Configures the time that the token was issued
      */
-    #[NoDiscard]
-    public function issuedAt(DateTimeImmutable $issuedAt): Builder;
-
+    #[No_Discard]
+    public function issued_at(DateTimeImmutable $issued_at): Builder;
     /**
      * Configures the issuer
      *
      * @param non-empty-string $issuer
      */
-    #[NoDiscard]
-    public function issuedBy(string $issuer): Builder;
-
+    #[No_Discard]
+    public function issued_by(string $issuer): Builder;
     /**
      * Configures the time before which the token cannot be accepted
      */
-    #[NoDiscard]
-    public function canOnlyBeUsedAfter(DateTimeImmutable $notBefore): Builder;
-
+    #[No_Discard]
+    public function can_only_be_used_after(DateTimeImmutable $not_before): Builder;
     /**
      * Configures the subject
      *
      * @param non-empty-string $subject
      */
-    #[NoDiscard]
-    public function relatedTo(string $subject): Builder;
-
+    #[No_Discard]
+    public function related_to(string $subject): Builder;
     /**
      * Configures a header item
      *
      * @param non-empty-string $name
      */
-    #[NoDiscard]
-    public function withHeader(string $name, mixed $value): Builder;
-
+    #[No_Discard]
+    public function with_header(string $name, mixed $value): Builder;
     /**
      * Configures a claim item
      *
@@ -81,9 +71,8 @@ interface Builder
      *
      * @throws RegisteredClaimGiven When trying to set a registered claim.
      */
-    #[NoDiscard]
-    public function withClaim(string $name, mixed $value): Builder;
-
+    #[No_Discard]
+    public function with_claim(string $name, mixed $value): Builder;
     /**
      * Returns a signed token to be used
      *
@@ -92,6 +81,6 @@ interface Builder
      * @throws InvalidKeyProvided  When issue key is invalid/incompatible.
      * @throws ConversionFailed    When signature could not be converted.
      */
-    #[NoDiscard]
-    public function getToken(Signer $signer, Key $key): UnencryptedToken;
+    #[No_Discard]
+    public function get_token(Signer $signer, Key $key): Unencrypted_Token;
 }

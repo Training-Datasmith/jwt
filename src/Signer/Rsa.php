@@ -1,36 +1,27 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Signer;
 
 use const OPENSSL_KEYTYPE_RSA;
-
-abstract readonly class Rsa extends OpenSSL
+abstract readonly class Rsa extends Open_Ssl
 {
     private const int MINIMUM_KEY_LENGTH = 2048;
-
     final public function sign(string $payload, Key $key): string
     {
-        return $this->createSignature($key, $payload);
+        return $this->create_signature($key, $payload);
     }
-
     final public function verify(string $expected, string $payload, Key $key): bool
     {
-        return $this->verifySignature($expected, $payload, $key);
+        return $this->verify_signature($expected, $payload, $key);
     }
-
-    final protected function guardAgainstIncompatibleKey(int $type, int $lengthInBits): void
+    final protected function guard_against_incompatible_key(int $type, int $length_in_bits): void
     {
         if ($type !== OPENSSL_KEYTYPE_RSA) {
-            throw InvalidKeyProvided::incompatibleKeyType(
-                self::KEY_TYPE_MAP[OPENSSL_KEYTYPE_RSA],
-                self::KEY_TYPE_MAP[$type] ?? 'unknown',
-            );
+            throw Invalid_Key_Provided::incompatible_key_type(self::KEY_TYPE_MAP[OPENSSL_KEYTYPE_RSA], self::KEY_TYPE_MAP[$type] ?? 'unknown');
         }
-
-        if ($lengthInBits < self::MINIMUM_KEY_LENGTH) {
-            throw InvalidKeyProvided::tooShort(self::MINIMUM_KEY_LENGTH, $lengthInBits);
+        if ($length_in_bits < self::MINIMUM_KEY_LENGTH) {
+            throw Invalid_Key_Provided::too_short(self::MINIMUM_KEY_LENGTH, $length_in_bits);
         }
     }
 }

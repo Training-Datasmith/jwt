@@ -1,41 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Token;
 
 use InvalidArgumentException;
 use Lcobucci\JWT\Exception;
-
-final class InvalidTokenStructure extends InvalidArgumentException implements Exception
+final class Invalid_Token_Structure extends InvalidArgumentException implements Exception
 {
-    public static function missingOrNotEnoughSeparators(): self
+    public static function missing_or_not_enough_separators(): self
     {
         return new self('The JWT string must have two dots');
     }
-
-    public static function missingHeaderPart(): self
+    public static function missing_header_part(): self
     {
         return new self('The JWT string is missing the Header part');
     }
-
-    public static function missingClaimsPart(): self
+    public static function missing_claims_part(): self
     {
         return new self('The JWT string is missing the Claim part');
     }
-
-    public static function missingSignaturePart(): self
+    public static function missing_signature_part(): self
     {
         return new self('The JWT string is missing the Signature part');
     }
-
     /** @param non-empty-string $part */
-    public static function arrayExpected(string $part): self
+    public static function array_expected(string $part): self
     {
         return new self($part . ' must be an array with non-empty-string keys');
     }
-
-    public static function dateIsNotParseable(string $value): self
+    public static function date_is_not_parseable(string $value): self
     {
         return new self('Value is not in the allowed date format: ' . $value);
     }

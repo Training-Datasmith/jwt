@@ -1,25 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Signer\Ecdsa;
 
 use InvalidArgumentException;
 use Lcobucci\JWT\Exception;
-
-final class ConversionFailed extends InvalidArgumentException implements Exception
+final class Conversion_Failed extends InvalidArgumentException implements Exception
 {
-    public static function invalidLength(): self
+    public static function invalid_length(): self
     {
         return new self('Invalid signature length.');
     }
-
-    public static function incorrectStartSequence(): self
+    public static function incorrect_start_sequence(): self
     {
         return new self('Invalid data. Should start with a sequence.');
     }
-
-    public static function integerExpected(): self
+    public static function integer_expected(): self
     {
         return new self('Invalid data. Should contain an integer.');
     }

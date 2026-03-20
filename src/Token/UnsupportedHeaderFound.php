@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Token;
 
 use InvalidArgumentException;
 use Lcobucci\JWT\Exception;
-
-final class UnsupportedHeaderFound extends InvalidArgumentException implements Exception
+final class Unsupported_Header_Found extends InvalidArgumentException implements Exception
 {
     public static function encryption(): self
     {

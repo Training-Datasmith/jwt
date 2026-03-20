@@ -1,15 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
-use Lcobucci\JWT\Signer\CannotSignPayload;
-use Lcobucci\JWT\Signer\Ecdsa\ConversionFailed;
-use Lcobucci\JWT\Signer\InvalidKeyProvided;
+use Lcobucci\JWT\Signer\Cannot_Sign_Payload;
+use Lcobucci\JWT\Signer\Ecdsa\Conversion_Failed;
+use Lcobucci\JWT\Signer\Invalid_Key_Provided;
 use Lcobucci\JWT\Signer\Key;
-use NoDiscard;
-
+use No_Discard;
 /** @immutable */
 interface Signer
 {
@@ -18,8 +16,7 @@ interface Signer
      *
      * @return non-empty-string
      */
-    public function algorithmId(): string;
-
+    public function algorithm_id(): string;
     /**
      * Creates a hash for the given payload
      *
@@ -31,9 +28,8 @@ interface Signer
      * @throws InvalidKeyProvided When issue key is invalid/incompatible.
      * @throws ConversionFailed   When signature could not be converted.
      */
-    #[NoDiscard]
+    #[No_Discard]
     public function sign(string $payload, Key $key): string;
-
     /**
      * Returns if the expected hash matches with the data and key
      *
@@ -43,6 +39,6 @@ interface Signer
      * @throws InvalidKeyProvided When issue key is invalid/incompatible.
      * @throws ConversionFailed   When signature could not be converted.
      */
-    #[NoDiscard]
+    #[No_Discard]
     public function verify(string $expected, string $payload, Key $key): bool;
 }

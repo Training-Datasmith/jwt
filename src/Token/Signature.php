@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Token;
 
 final readonly class Signature
@@ -13,19 +12,17 @@ final readonly class Signature
     public function __construct(private string $hash, private string $encoded)
     {
     }
-
     /** @return non-empty-string */
     public function hash(): string
     {
         return $this->hash;
     }
-
     /**
      * Returns the encoded version of the signature
      *
      * @return non-empty-string
      */
-    public function toString(): string
+    public function to_string(): string
     {
         return $this->encoded;
     }

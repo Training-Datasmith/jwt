@@ -1,121 +1,85 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Token;
 
 use function array_diff;
 use function array_merge;
-
 use DateTimeImmutable;
-
 use function in_array;
-
 use Lcobucci\JWT\Builder as BuilderInterface;
-use Lcobucci\JWT\ClaimsFormatter;
+use Lcobucci\JWT\Claims_Formatter;
 use Lcobucci\JWT\Encoder;
-use Lcobucci\JWT\Encoding\CannotEncodeContent;
+use Lcobucci\JWT\Encoding\Cannot_Encode_Content;
 use Lcobucci\JWT\Signer;
-
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\UnencryptedToken;
-use NoDiscard;
-
+use Lcobucci\JWT\Unencrypted_Token;
+use No_Discard;
 /** @immutable */
-final readonly class Builder implements BuilderInterface
+final readonly class Builder implements Builder_Interface
 {
     /**
      * @param array<non-empty-string, mixed> $headers
      * @param array<non-empty-string, mixed> $claims
      */
-    private function __construct(
-        private Encoder $encoder,
-        private ClaimsFormatter $claimFormatter,
-        private array $headers = ['typ' => 'JWT', 'alg' => null],
-        private array $claims = [],
-    ) {
-    }
-
-    #[NoDiscard]
-    public static function new(Encoder $encoder, ClaimsFormatter $claimFormatter): self
+    private function __construct(private Encoder $encoder, private Claims_Formatter $claim_formatter, private array $headers = ['typ' => 'JWT', 'alg' => null], private array $claims = [])
     {
-        return new self($encoder, $claimFormatter);
     }
-
-    public function permittedFor(string ...$audiences): BuilderInterface
+    #[No_Discard]
+    public static function new(Encoder $encoder, Claims_Formatter $claim_formatter): self
     {
-        $configured = $this->claims[RegisteredClaims::AUDIENCE] ?? [];
-        $toAppend   = array_diff($audiences, $configured);
-
-        return $this->newWithClaim(RegisteredClaims::AUDIENCE, array_merge($configured, $toAppend));
+        return new self($encoder, $claim_formatter);
     }
-
-    public function expiresAt(DateTimeImmutable $expiration): BuilderInterface
+    public function permitted_for(string ...$audiences): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::EXPIRATION_TIME, $expiration);
+        $configured = $this->claims[Registered_Claims::AUDIENCE] ?? [];
+        $to_append = array_diff($audiences, $configured);
+        return $this->new_with_claim(Registered_Claims::AUDIENCE, array_merge($configured, $to_append));
     }
-
-    public function identifiedBy(string $id): BuilderInterface
+    public function expires_at(DateTimeImmutable $expiration): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::ID, $id);
+        return $this->new_with_claim(Registered_Claims::EXPIRATION_TIME, $expiration);
     }
-
-    public function issuedAt(DateTimeImmutable $issuedAt): BuilderInterface
+    public function identified_by(string $id): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::ISSUED_AT, $issuedAt);
+        return $this->new_with_claim(Registered_Claims::ID, $id);
     }
-
-    public function issuedBy(string $issuer): BuilderInterface
+    public function issued_at(DateTimeImmutable $issued_at): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::ISSUER, $issuer);
+        return $this->new_with_claim(Registered_Claims::ISSUED_AT, $issued_at);
     }
-
-    public function canOnlyBeUsedAfter(DateTimeImmutable $notBefore): BuilderInterface
+    public function issued_by(string $issuer): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::NOT_BEFORE, $notBefore);
+        return $this->new_with_claim(Registered_Claims::ISSUER, $issuer);
     }
-
-    public function relatedTo(string $subject): BuilderInterface
+    public function can_only_be_used_after(DateTimeImmutable $not_before): Builder_Interface
     {
-        return $this->newWithClaim(RegisteredClaims::SUBJECT, $subject);
+        return $this->new_with_claim(Registered_Claims::NOT_BEFORE, $not_before);
     }
-
-    public function withHeader(string $name, mixed $value): BuilderInterface
+    public function related_to(string $subject): Builder_Interface
     {
-        $headers        = $this->headers;
+        return $this->new_with_claim(Registered_Claims::SUBJECT, $subject);
+    }
+    public function with_header(string $name, mixed $value): Builder_Interface
+    {
+        $headers = $this->headers;
         $headers[$name] = $value;
-
-        return new self(
-            $this->encoder,
-            $this->claimFormatter,
-            $headers,
-            $this->claims,
-        );
+        return new self($this->encoder, $this->claim_formatter, $headers, $this->claims);
     }
-
-    public function withClaim(string $name, mixed $value): BuilderInterface
+    public function with_claim(string $name, mixed $value): Builder_Interface
     {
-        if (in_array($name, RegisteredClaims::ALL, true)) {
-            throw RegisteredClaimGiven::forClaim($name);
+        if (in_array($name, Registered_Claims::ALL, true)) {
+            throw Registered_Claim_Given::for_claim($name);
         }
-
-        return $this->newWithClaim($name, $value);
+        return $this->new_with_claim($name, $value);
     }
-
     /** @param non-empty-string $name */
-    private function newWithClaim(string $name, mixed $value): BuilderInterface
+    private function new_with_claim(string $name, mixed $value): Builder_Interface
     {
-        $claims        = $this->claims;
+        $claims = $this->claims;
         $claims[$name] = $value;
-
-        return new self(
-            $this->encoder,
-            $this->claimFormatter,
-            $this->headers,
-            $claims,
-        );
+        return new self($this->encoder, $this->claim_formatter, $this->headers, $claims);
     }
-
     /**
      * @param array<non-empty-string, mixed> $items
      *
@@ -123,26 +87,16 @@ final readonly class Builder implements BuilderInterface
      */
     private function encode(array $items): string
     {
-        return $this->encoder->base64UrlEncode(
-            $this->encoder->jsonEncode($items),
-        );
+        return $this->encoder->base64url_encode($this->encoder->json_encode($items));
     }
-
-    public function getToken(Signer $signer, Key $key): UnencryptedToken
+    public function get_token(Signer $signer, Key $key): Unencrypted_Token
     {
-        $headers        = $this->headers;
-        $headers['alg'] = $signer->algorithmId();
-
-        $encodedHeaders = $this->encode($headers);
-        $encodedClaims  = $this->encode($this->claimFormatter->formatClaims($this->claims));
-
-        $signature        = $signer->sign($encodedHeaders . '.' . $encodedClaims, $key);
-        $encodedSignature = $this->encoder->base64UrlEncode($signature);
-
-        return new Plain(
-            new DataSet($headers, $encodedHeaders),
-            new DataSet($this->claims, $encodedClaims),
-            new Signature($signature, $encodedSignature),
-        );
+        $headers = $this->headers;
+        $headers['alg'] = $signer->algorithm_id();
+        $encoded_headers = $this->encode($headers);
+        $encoded_claims = $this->encode($this->claim_formatter->format_claims($this->claims));
+        $signature = $signer->sign($encoded_headers . '.' . $encoded_claims, $key);
+        $encoded_signature = $this->encoder->base64url_encode($signature);
+        return new Plain(new Data_Set($headers, $encoded_headers), new Data_Set($this->claims, $encoded_claims), new Signature($signature, $encoded_signature));
     }
 }

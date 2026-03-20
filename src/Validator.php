@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
 use Lcobucci\JWT\Validation\Constraint;
-use Lcobucci\JWT\Validation\NoConstraintsGiven;
-use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
-use NoDiscard;
-
+use Lcobucci\JWT\Validation\No_Constraints_Given;
+use Lcobucci\JWT\Validation\Required_Constraints_Violated;
+use No_Discard;
 interface Validator
 {
     /**
@@ -16,8 +14,7 @@ interface Validator
      * @throws NoConstraintsGiven
      */
     public function assert(Token $token, Constraint ...$constraints): void;
-
     /** @throws NoConstraintsGiven */
-    #[NoDiscard]
+    #[No_Discard]
     public function validate(Token $token, Constraint ...$constraints): bool;
 }

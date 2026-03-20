@@ -1,24 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
-use Lcobucci\JWT\Token\DataSet;
+use Lcobucci\JWT\Token\Data_Set;
 use Lcobucci\JWT\Token\Signature;
-
-interface UnencryptedToken extends Token
+interface Unencrypted_Token extends Token
 {
     /**
      * Returns the token claims
      */
-    public function claims(): DataSet;
-
+    public function claims(): Data_Set;
     /**
      * Returns the token signature
      */
     public function signature(): Signature;
-
     /**
      * Returns the token payload
      *

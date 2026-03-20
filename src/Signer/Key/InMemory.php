@@ -1,60 +1,52 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT\Signer\Key;
 
 use function assert;
 use function is_string;
-
-use Lcobucci\JWT\Signer\InvalidKeyProvided;
+use Lcobucci\JWT\Signer\Invalid_Key_Provided;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\SodiumBase64Polyfill;
-use SensitiveParameter;
-
-use SplFileObject;
+use Lcobucci\JWT\Sodium_Base64polyfill;
+use Sensitive_Parameter;
+use Spl_File_Object;
 use Throwable;
-
-final readonly class InMemory implements Key
+final readonly class In_Memory implements Key
 {
     /** @param non-empty-string $contents */
     private function __construct(
-        #[SensitiveParameter]
+        #[Sensitive_Parameter]
         public string $contents,
-        #[SensitiveParameter]
-        public string $passphrase,
-    ) {
+        #[Sensitive_Parameter]
+        public string $passphrase
+    )
+    {
     }
-
     /** @param non-empty-string $contents */
-    public static function plainText(
-        #[SensitiveParameter]
+    public static function plain_text(
+        #[Sensitive_Parameter]
         string $contents,
-        #[SensitiveParameter]
-        string $passphrase = '',
-    ): self {
-        self::guardAgainstEmptyKey($contents); // @phpstan-ignore staticMethod.alreadyNarrowedType
-
+        #[Sensitive_Parameter]
+        string $passphrase = ''
+    ): self
+    {
+        self::guard_against_empty_key($contents);
+        // @phpstan-ignore staticMethod.alreadyNarrowedType
         return new self($contents, $passphrase);
     }
-
     /** @param non-empty-string $contents */
     public static function base64Encoded(
-        #[SensitiveParameter]
+        #[Sensitive_Parameter]
         string $contents,
-        #[SensitiveParameter]
-        string $passphrase = '',
-    ): self {
-        $decoded = SodiumBase64Polyfill::base642bin(
-            $contents,
-            SodiumBase64Polyfill::SODIUM_BASE64_VARIANT_ORIGINAL,
-        );
-
-        self::guardAgainstEmptyKey($decoded); // @phpstan-ignore staticMethod.alreadyNarrowedType
-
+        #[Sensitive_Parameter]
+        string $passphrase = ''
+    ): self
+    {
+        $decoded = Sodium_Base64polyfill::base642bin($contents, Sodium_Base64polyfill::SODIUM_BASE64_VARIANT_ORIGINAL);
+        self::guard_against_empty_key($decoded);
+        // @phpstan-ignore staticMethod.alreadyNarrowedType
         return new self($decoded, $passphrase);
     }
-
     /**
      * @param non-empty-string $path
      *
@@ -62,37 +54,32 @@ final readonly class InMemory implements Key
      */
     public static function file(
         string $path,
-        #[SensitiveParameter]
-        string $passphrase = '',
-    ): self {
+        #[Sensitive_Parameter]
+        string $passphrase = ''
+    ): self
+    {
         try {
-            $file = new SplFileObject($path);
+            $file = new Spl_File_Object($path);
         } catch (Throwable $exception) {
-            throw FileCouldNotBeRead::onPath($path, $exception);
+            throw File_Could_Not_Be_Read::on_path($path, $exception);
         }
-
-        $fileSize = $file->getSize();
-        $contents = $fileSize > 0 ? $file->fread($file->getSize()) : '';
+        $file_size = $file->get_size();
+        $contents = $file_size > 0 ? $file->fread($file->get_size()) : '';
         assert(is_string($contents));
-
-        self::guardAgainstEmptyKey($contents);
-
+        self::guard_against_empty_key($contents);
         return new self($contents, $passphrase);
     }
-
     /** @phpstan-assert non-empty-string $contents */
-    private static function guardAgainstEmptyKey(string $contents): void
+    private static function guard_against_empty_key(string $contents): void
     {
         if ($contents === '') {
-            throw InvalidKeyProvided::cannotBeEmpty();
+            throw Invalid_Key_Provided::cannot_be_empty();
         }
     }
-
     public function contents(): string
     {
         return $this->contents;
     }
-
     public function passphrase(): string
     {
         return $this->passphrase;

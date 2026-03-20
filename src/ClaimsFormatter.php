@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Lcobucci\JWT;
 
-use NoDiscard;
-
-interface ClaimsFormatter
+use No_Discard;
+interface Claims_Formatter
 {
     /**
      * @param array<non-empty-string, mixed> $claims
      *
      * @return array<non-empty-string, mixed>
      */
-    #[NoDiscard]
-    public function formatClaims(array $claims): array;
+    #[No_Discard]
+    public function format_claims(array $claims): array;
 }
